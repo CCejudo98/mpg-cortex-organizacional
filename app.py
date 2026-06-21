@@ -15,7 +15,7 @@ COSTOS_ENTROPIA_SERVICIOS = {
     "S2_friccion_com": 1200.0,       # Costo de juntas extra y correos duplicados por desalineación
 }
 
-st.set_page_config(page_title="gac - Córtex Organizacional", page_icon="🧠", layout="wide")
+st.set_page_config(page_title="GAC - Córtex Organizacional", page_icon="🧠", layout="wide")
 
 # ==========================================
 # ESTILO VISUAL: BUSINESS NAVY (TEXTOS CORREGIDOS A BLANCO)
