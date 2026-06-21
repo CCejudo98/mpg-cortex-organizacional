@@ -79,6 +79,8 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+st.title("🧠 CÓRTEX ORGANIZACIONAL: MOTOR DE VIABILIDAD")
+st.caption("GAC Consultoría // Automatización de Estándares de Calidad e Inteligencia de Sistemas.")
 # ==========================================
 # CONEXIÓN A LA BASE DE DATOS
 # ==========================================
