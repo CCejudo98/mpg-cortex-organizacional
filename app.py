@@ -25,7 +25,7 @@ st.markdown("""
 <style>
     /* Fondo Gris Oscuro Corporativo, sin fatiga azul */
     .stApp {
-        background-color: #111625;
+        background-color: #111625 !important;
         color: #ffffff !important;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
@@ -124,7 +124,7 @@ if db_disponible:
         pass
 
 # ==========================================
-# DESPLIEGUE DE MÓDULOS DE SOFTWARE
+# DESPLIEGUE DE MÓDULOS DE SOFTWARE (VARIABLES CORREGIDAS)
 # ==========================================
 
 if subsistema_activo == "Módulo 1: Flujo Operativo (Lean & Gemba)":
@@ -171,7 +171,7 @@ if subsistema_activo == "Módulo 1: Flujo Operativo (Lean & Gemba)":
             except Exception as e: 
                 st.error(f"Falla de almacenamiento: {e}")
 
-elif subsystem_activo == "Módulo 2: Control de Variabilidad (SPC & Alertas)":
+elif subsistema_activo == "Módulo 2: Control de Variabilidad (SPC & Alertas)":
     st.markdown("## 🛡️ Módulo de Coordinación y Control de Variabilidad")
     st.markdown("El sistema analiza las desviaciones estándar en tiempo real para eliminar desperdicios en el flujo de trabajo.")
     
@@ -211,11 +211,11 @@ elif subsystem_activo == "Módulo 2: Control de Variabilidad (SPC & Alertas)":
     st.markdown("### 🎛️ Evaluación de Fricción Interdepartamental")
     cuellos_botella_ingresados = st.slider("Número de cuellos de botella / bloqueos operativos hoy:", 0, 10, 2)
     fricciones_comunicacion = st.slider("Fallas de alineación interna reportadas:", 0, 20, 5)
-    impacto_s2 = (cuellos_botella_ingresados * COSTOS_ENTROPIA_SERVICIOS["S2_cuello_botella"]) + (fricciones_comunicacion * COSTOS_ENTROPIA_SERVICIOS["S2_friccion_com"])
+    impacto_s2 = (cuellos_botella_ingresados * COSTOS_ENTROPIA_SERVICIOS["S2_cuello_botella"]) + (fricciones_comunicacion * COSTOS_ENTROIOS_SERVICIOS["S2_friccion_com"] if "S2_friccion_com" in COSTOS_ENTROPIA_SERVICIOS else fricciones_comunicacion * 1200.0)
     
     st.metric(label="Pérdida Económica por Descoordinación Interna (Estimación Diaria)", value=f"${impacto_s2:,.2f} MXN", delta="-Intervención Requerida", delta_color="inverse")
 
-elif subsystem_activo == "Módulo 3: Auditoría de Calidad (ISO 9001 Dashboard)":
+elif subsistema_activo == "Módulo 3: Auditoría de Calidad (ISO 9001 Dashboard)":
     st.markdown("## 📈 Módulo de Evaluación de Desempeño y Auditoría")
     st.markdown("Este módulo consolida los registros de estabilidad procesal para alimentar los requerimientos de la norma ISO 9001.")
     
