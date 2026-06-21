@@ -19,18 +19,20 @@ COSTOS_ENTROPIA_SERVICIOS = {
 st.set_page_config(page_title="GAC - Córtex Organizacional", page_icon="🧠", layout="wide")
 
 # ==========================================
-# ESTILO VISUAL: BUSINESS NAVY PROFESIONAL
+# CÁPSULA ESTÉTICA: GRIS OXFORD Y AZUL ACERO (MÍNIMA FRICCIÓN VISUAL)
 # ==========================================
 st.markdown("""
 <style>
+    /* Fondo Gris Oscuro Corporativo, sin fatiga azul */
     .stApp {
-        background-color: #001f3f;
+        background-color: #111625;
         color: #ffffff !important;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    /* Barra Lateral en Gris Grafito */
     [data-testid="stSidebar"], [data-testid="stSidebar"] > div:first-child {
-        background-color: #1a1a1a !important;
-        border-right: 2px solid #003366 !important;
+        background-color: #1e2230 !important;
+        border-right: 2px solid #2e354f !important;
     }
     section[data-testid="stSidebar"] .stMarkdown, section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] h4, section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span {
         color: #ffffff !important;
@@ -39,15 +41,16 @@ st.markdown("""
         color: #ffffff !important;
         font-weight: 600 !important;
     }
+    /* Campos de entrada limpios */
     .stNumberInput input, .stTextInput input, .stSelectbox div {
-        background-color: #f0f2f6 !important;
-        color: #001f3f !important;
-        border-radius: 5px !important;
+        background-color: #f1f5f9 !important;
+        color: #0f172a !important;
+        border-radius: 6px !important;
     }
-    hr { border-top: 1px solid #003366 !important; }
-    [data-testid="stMetricLabel"] p { color: #ffffff !important; }
-    [data-testid="stMetricValue"] div { color: #4ade80 !important; }
-    [data-testid="stMetricDelta"] div { color: #ff6b6b !important; }
+    hr { border-top: 1px solid #2e354f !important; }
+    [data-testid="stMetricLabel"] p { color: #94a3b8 !important; }
+    [data-testid="stMetricValue"] div { color: #34d399 !important; }
+    [data-testid="stMetricDelta"] div { color: #f87171 !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -111,10 +114,8 @@ subsistema_activo = st.radio(
     horizontal=True
 )
 
-# SECTOR SELECCIONADO PARA EL FILTRADO HISTÓRICO DE PROCESOS
 foco_metabolico = "Producción y Fábrica"
 
-# EXTRACCIÓN DINÁMICA DEL HISTÓRICO SEGÚN EL ÁREA ACTIVA
 if db_disponible:
     try:
         cursor.execute("SELECT efficiency FROM metric_history WHERE foco = %s ORDER BY id DESC LIMIT 30;", (foco_metabolico,))
@@ -150,11 +151,11 @@ if subsistema_activo == "Módulo 1: Flujo Operativo (Lean & Gemba)":
     st.markdown("---")
     c1, c2, c3 = st.columns(3)
     with c1:
-        st.markdown(f'<div style="background-color: #1a1a1a; padding: 25px; border-radius: 8px; border: 1px solid #003366;"><span style="font-size: 12px; text-transform: uppercase;">Eficiencia de Flujo Continuo</span><p style="font-size: 32px; font-weight: bold; color: #4ade80 !important; margin: 0;">{eficiencia_real:.1f}%</p></div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="background-color: #1e293b; padding: 25px; border-radius: 8px; border: 1px solid #334155;"><span style="font-size: 12px; text-transform: uppercase; color: #94a3b8;">Eficiencia de Flujo Continuo</span><p style="font-size: 32px; font-weight: bold; color: #34d399 !important; margin: 0;">{eficiencia_real:.1f}%</p></div>', unsafe_allow_html=True)
     with c2:
-        st.markdown(f'<div style="background-color: #1a1a1a; padding: 25px; border-radius: 8px; border: 1px solid #772222;"><span style="font-size: 12px; text-transform: uppercase;">Fuga Financiera Anual</span><p style="font-size: 32px; font-weight: bold; color: #ff6b6b !important; margin: 0;">${perdida_anual:,.2f} MXN</p></div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="background-color: #1e293b; padding: 25px; border-radius: 8px; border: 1px solid #7f1d1d;"><span style="font-size: 12px; text-transform: uppercase; color: #fca5a5;">Fuga Financiera Anual</span><p style="font-size: 32px; font-weight: bold; color: #f87171 !important; margin: 0;">${perdida_anual:,.2f} MXN</p></div>', unsafe_allow_html=True)
     with c3:
-        st.markdown(f'<div style="background-color: #0f3322; padding: 25px; border-radius: 8px;"><span style="color: #4ade80 !important; font-size: 12px; text-transform: uppercase;">Ahorro Retenido por GAC (70%)</span><p style="font-size: 32px; font-weight: bold; color: #4ade80 !important; margin: 0;">${ahorro_potencial:,.2f} MXN</p></div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="background-color: #064e3b; padding: 25px; border-radius: 8px; border: 1px solid #047857;"><span style="color: #34d399 !important; font-size: 12px; text-transform: uppercase;">Ahorro Retenido por GAC (70%)</span><p style="font-size: 32px; font-weight: bold; color: #34d399 !important; margin: 0;">${ahorro_potencial:,.2f} MXN</p></div>', unsafe_allow_html=True)
 
     st.markdown("---")
     if st.button("💾 Registrar Datos en Histórico Central"):
@@ -170,7 +171,7 @@ if subsistema_activo == "Módulo 1: Flujo Operativo (Lean & Gemba)":
             except Exception as e: 
                 st.error(f"Falla de almacenamiento: {e}")
 
-elif subsistema_activo == "Módulo 2: Control de Variabilidad (SPC & Alertas)":
+elif subsystem_activo == "Módulo 2: Control de Variabilidad (SPC & Alertas)":
     st.markdown("## 🛡️ Módulo de Coordinación y Control de Variabilidad")
     st.markdown("El sistema analiza las desviaciones estándar en tiempo real para eliminar desperdicios en el flujo de trabajo.")
     
@@ -180,22 +181,22 @@ elif subsistema_activo == "Módulo 2: Control de Variabilidad (SPC & Alertas)":
         ultima_eficiencia = historico_eficiencia[0]
         
         if ultima_eficiencia >= (media_historica - desviacion_sigma):
-            estado, color_box, color_txt = "CONFORME", "#1a2e1a", "#4ade80"
+            estado, color_box, color_txt = "CONFORME", "#064e3b", "#34d399"
             desc = "Variabilidad Operativa dentro de límites aceptables de control (Sigma 1)."
         elif ultima_eficiencia >= (media_historica - (2 * desviacion_sigma)):
-            estado, color_box, color_txt = "ACCIÓN PREVENTIVA", "#3b3010", "#facc15"
+            estado, color_box, color_txt = "ACCCIÓN PREVENTIVA", "#78350f", "#fbbf24"
             desc = "Desviación inusual detectada. El flujo presenta síntomas de fricción interna."
         else:
-            estado, color_box, color_txt = "DESVIACIÓN CRÍTICA", "#3b1a1a", "#f87171"
+            estado, color_box, color_txt = "DESVIACIÓN CRÍTICA", "#7f1d1d", "#f87171"
             desc = "El proceso rompió límites estadísticos. Cuello de botella severo o retrabajo masivo."
     else:
-        estado, color_box, color_txt = "FALTA DE DATOS", "#1a1a1a", "#ffffff"
+        estado, color_box, color_txt = "FALTA DE DATOS", "#1e293b", "#ffffff"
         desc = "Se requieren al menos 3 registros en la base de datos común para activar el cálculo dinámico de estabilidad."
         ultima_eficiencia = 100.0
         media_historica = 100.0
 
     st.markdown(f"""
-    <div style="background-color: {color_box}; padding: 25px; border-radius: 8px; border-left: 8px solid {color_txt}; margin-bottom: 25px;">
+    <div style="background-color: {color_box}; padding: 25px; border-radius: 8px; border-left: 8px solid {color_txt}; margin-bottom: 25px; border-top: 1px solid #334155; border-right: 1px solid #334155; border-bottom: 1px solid #334155;">
         <h4 style="color: {color_txt} !important; margin:0;">Diagnóstico de Estabilidad del Proceso (SPC)</h4>
         <p style="margin:5px 0 0 0; font-size:16px;">{desc}</p>
         <p style="font-size:24px; font-weight:bold; margin:10px 0 0 0;">ESTATUS: {estado} ({ultima_eficiencia:.1f}% Eficiencia Actual)</p>
@@ -214,7 +215,7 @@ elif subsistema_activo == "Módulo 2: Control de Variabilidad (SPC & Alertas)":
     
     st.metric(label="Pérdida Económica por Descoordinación Interna (Estimación Diaria)", value=f"${impacto_s2:,.2f} MXN", delta="-Intervención Requerida", delta_color="inverse")
 
-elif subsistema_activo == "Módulo 3: Auditoría de Calidad (ISO 9001 Dashboard)":
+elif subsystem_activo == "Módulo 3: Auditoría de Calidad (ISO 9001 Dashboard)":
     st.markdown("## 📈 Módulo de Evaluación de Desempeño y Auditoría")
     st.markdown("Este módulo consolida los registros de estabilidad procesal para alimentar los requerimientos de la norma ISO 9001.")
     
