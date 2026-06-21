@@ -18,14 +18,14 @@ COSTOS_ENTROPIA_SERVICIOS = {
 st.set_page_config(page_title="GAC - Córtex Organizacional", page_icon="🧠", layout="wide")
 
 # ==========================================
-# ESTILO VISUAL: BUSINESS NAVY (TEXTOS CORREGIDOS A BLANCO)
+# ESTILO VISUAL: BUSINESS NAVY (TEXTOS FORZADOS A BLANCO PURO)
 # ==========================================
 st.markdown("""
 <style>
     /* Fondo Azul Marino Profesional */
     .stApp {
         background-color: #001f3f;
-        color: #ffffff;
+        color: #ffffff !important;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     
@@ -35,11 +35,11 @@ st.markdown("""
         border-right: 2px solid #003366 !important;
     }
     
-    section[data-testid="stSidebar"] .stMarkdown, section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] h4 {
+    section[data-testid="stSidebar"] .stMarkdown, section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] h4, section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span {
         color: #ffffff !important;
     }
 
-    h1, h2, h3, h4, h5, h6, label {
+    h1, h2, h3, h4, h5, h6, label, p, span {
         color: #ffffff !important;
         font-weight: 600 !important;
     }
@@ -58,16 +58,27 @@ st.markdown("""
         border-top: 1px solid #003366 !important;
     }
 
-    /* Corrección explícita para forzar texto blanco en etiquetas secundarias de métricas */
+    /* CORRECCIÓN DE COLORES NATIVOS */
     [data-testid="stMetricLabel"] p {
+        color: #ffffff !important;
+    }
+    [data-testid="stMetricValue"] div {
+        color: #4ade80 !important; 
+    }
+    [data-testid="stMetricDelta"] div {
+        color: #ff6b6b !important; 
+    }
+    
+    .stMarkdown div p {
+        color: #ffffff !important;
+    }
+
+    /* NUEVA REGLA: Forzar blanco en las letras del selector que me mostraste */
+    div[data-testid="stRadio"] label p {
         color: #ffffff !important;
     }
 </style>
 """, unsafe_allow_html=True)
-
-st.title("🧠 CÓRTEX ORGANIZACIONAL: MOTOR DE EFICIENCIA OPERATIVA")
-st.caption("GAC Consultoría // Automatización de Estándares de Calidad e Inteligencia de Sistemas.")
-
 # ==========================================
 # CONEXIÓN A LA BASE DE DATOS
 # ==========================================
