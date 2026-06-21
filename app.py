@@ -13,23 +13,23 @@ COSTOS_ENTROPIA_SERVICIOS = {
     "S1_retrabajo_hora": 350.0,      
     "S1_espera_minuto": 15.0,        
     "S2_cuello_botella": 2500.0,     
-    "S2_friccion_com": 1200.0,       
+    "S2_friccion_com": 1200.0        
 }
 
 st.set_page_config(page_title="GAC - Córtex Organizacional", page_icon="🧠", layout="wide")
 
 # ==========================================
-# CÁPSULA ESTÉTICA: GRIS MATE Y GRAFITO (CERO TONOS AZULES)
+# CÁPSULA ESTÉTICA: CARBONO Y GRAFITO PURO (CERO COMPLETAMENTE AZUL)
 # ==========================================
 st.markdown("""
 <style>
-    /* Fondo General Gris Oscuro Neutro, limpio de residuos azules */
+    /* Inyección de fondo gris oscuro mate neutro absoluto */
     .stApp {
         background-color: #12131a !important;
         color: #e2e8f0 !important;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    /* Barra Lateral en Gris Carbón */
+    /* Estructuración de barra lateral carbono */
     [data-testid="stSidebar"], [data-testid="stSidebar"] > div:first-child {
         background-color: #181920 !important;
         border-right: 2px solid #262730 !important;
@@ -41,7 +41,7 @@ st.markdown("""
         color: #ffffff !important;
         font-weight: 600 !important;
     }
-    /* Inputs con contraste neutral */
+    /* Entradas de datos con contraste limpio */
     .stNumberInput input, .stTextInput input, .stSelectbox div {
         background-color: #f8fafc !important;
         color: #0f172a !important;
@@ -67,7 +67,7 @@ try:
     conn = psycopg2.connect(DB_URL)
     cursor = conn.cursor()
     
-    # 1. Asegurar tabla base
+    # 1. Asegurar tabla base heredada
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS metric_history (
             id SERIAL PRIMARY KEY, 
@@ -79,7 +79,7 @@ try:
     """)
     conn.commit()
     
-    # 2. Asegurar columna foco
+    # 2. Inyección reparadora de la columna foco
     try:
         cursor.execute("ALTER TABLE metric_history ADD COLUMN IF NOT EXISTS foco VARCHAR(100);")
         conn.commit()
@@ -89,11 +89,8 @@ try:
     db_disponible = True
     st.sidebar.success("✅ Conexión con Servidor Central Activa")
 except Exception as e:
-    st.sidebar.warning(f"⚠️ Modo Local: {e}")
+    st.sidebar.warning(f"⚠️ Modo Local Activo: {e}")
 
 # ==========================================
-# DIRECCIÓN ESTRATÉGICA Y RIESGOS
+# DIRECCIÓN ESTRATÉGICA Y RIESGOS (CORREGIDO)
 # ==========================================
-st.sidebar.header("⚖️ Dirección Estratégica")
-nodo_id = st.sidebar.text_input("Nombre de la Empresa / Sucursal:", value="Mi PYME Eficiente 01")
-politica_calidad = st.sidebar.selectbox("Política de Calidad Activa:",
