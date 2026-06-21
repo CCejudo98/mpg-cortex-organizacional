@@ -65,7 +65,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🧠 CÓRTEX ORGANIZACIONAL: MOTOR DE EFICIENCIA OOPERATIVA")
+st.title("🧠 CÓRTEX ORGANIZACIONAL: MOTOR DE EFICIENCIA OPERATIVA")
 st.caption("GAC Consultoría // Automatización de Estándares de Calidad e Inteligencia de Sistemas.")
 
 # ==========================================
