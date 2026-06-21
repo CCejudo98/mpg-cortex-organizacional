@@ -116,12 +116,13 @@ subsistema_activo = st.radio(
 
 foco_metabolico = "Producción y Fábrica"
 
+# ADQUISICIÓN DE DATOS PROTEGIDA SIN ERRORES DE SINTAXIS
 if db_disponible:
     try:
         cursor.execute("SELECT efficiency FROM metric_history WHERE foco = %s ORDER BY id DESC LIMIT 30;", (foco_metabolico,))
         historico_eficiencia = [row[0] for row in cursor.fetchall()]
-    except Exception:
-        pass
+    except Exception as read_err:
+        st.sidebar.error(f"Fricción de lectura interna: {read_err}")
 
 # ==========================================
 # DESPLIEGUE DE MÓDULOS DE SOFTWARE
@@ -144,21 +145,4 @@ if subsistema_activo == "Módulo 1: Flujo Operativo (Lean & Gemba)":
         minutos_espera = st.number_input("Minutos acumulados que el cliente esperó por retrasos:", min_value=0.0, value=60.0)
         i_destroyed = ((horas_retrabajo * COSTOS_ENTROPIA_SERVICIOS["S1_retrabajo_hora"]) + (minutos_espera * COSTOS_ENTROPIA_SERVICIOS["S1_espera_minuto"])) * lambda_entorno
 
-    eficiencia_real = max(0.0, ((e_in_real - i_destroyed) / e_in_real) * 100.0) if e_in_real > 0 else 0.0
-    perdida_anual = i_destroyed * 365.0
-    ahorro_potencial = perdida_anual * 0.70
-
-    st.markdown("---")
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.markdown(f'<div style="background-color: #1c1d26; padding: 25px; border-radius: 8px; border: 1px solid #2d2e3a;"><span style="font-size: 12px; text-transform: uppercase; color: #94a3b8;">Eficiencia de Flujo Continuo</span><p style="font-size: 32px; font-weight: bold; color: #34d399 !important; margin: 0;">{eficiencia_real:.1f}%</p></div>', unsafe_allow_html=True)
-    with c2:
-        st.markdown(f'<div style="background-color: #1c1d26; padding: 25px; border-radius: 8px; border: 1px solid #451a1a;"><span style="font-size: 12px; text-transform: uppercase; color: #fca5a5;">Fuga Financiera Anual</span><p style="font-size: 32px; font-weight: bold; color: #f87171 !important; margin: 0;">${perdida_anual:,.2f} MXN</p></div>', unsafe_allow_html=True)
-    with c3:
-        st.markdown(f'<div style="background-color: #142e1b; padding: 25px; border-radius: 8px; border: 1px solid #1e5a2c;"><span style="color: #34d399 !important; font-size: 12px; text-transform: uppercase;">Ahorro Retenido por GAC (70%)</span><p style="font-size: 32px; font-weight: bold; color: #34d399 !important; margin: 0;">${ahorro_potencial:,.2f} MXN</p></div>', unsafe_allow_html=True)
-
-    st.markdown("---")
-    if st.button("💾 Registrar Datos en Histórico Central"):
-        if db_disponible:
-            try:
-                cursor
+    eficiencia_real = max(0.0, ((e_
